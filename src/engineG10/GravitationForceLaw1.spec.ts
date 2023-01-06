@@ -1,0 +1,51 @@
+import { Geometric1, Unit } from "@geometryzen/multivectors";
+import { GravitationLaw } from "../core/GravitationLaw";
+import { Particle1 } from "./Particle1";
+
+describe("GravitationForceLaw1", function () {
+    it("potentialEnergy()", function () {
+        const m1 = new Geometric1([2, 0], Unit.KILOGRAM);
+        const q1 = new Geometric1([0, 0], Unit.COULOMB);
+        const body1 = new Particle1(m1, q1);
+        body1.X = new Geometric1([0, 0], Unit.METER);
+        const m2 = new Geometric1([3, 0], Unit.KILOGRAM);
+        const q2 = new Geometric1([0, 0], Unit.COULOMB);
+        const body2 = new Particle1(m2, q2);
+        body2.X = new Geometric1([0, 4], Unit.METER);
+        const G = new Geometric1([4, 0], Unit.NEWTON.div(Unit.KILOGRAM).div(Unit.KILOGRAM).mul(Unit.METER).mul(Unit.METER));
+        const forceLaw = new GravitationLaw(body1, body2);
+        forceLaw.G = G;
+        const U = forceLaw.potentialEnergy();
+        expect(U.a).toBe(-6);
+        expect(U.x).toBe(0);
+        expect(U.uom).toBe(Unit.JOULE);
+        expect(U.isLocked()).toBe(true);
+        expect(U.isMutable()).toBe(false);
+    });
+    it("updateForces()", function () {
+        const m1 = new Geometric1([2, 0], Unit.KILOGRAM);
+        const q1 = new Geometric1([0, 0], Unit.COULOMB);
+        const body1 = new Particle1(m1, q1);
+        body1.X = new Geometric1([0, 0], Unit.METER);
+        const m2 = new Geometric1([3, 0], Unit.KILOGRAM);
+        const q2 = new Geometric1([0, 0], Unit.COULOMB);
+        const body2 = new Particle1(m2, q2);
+        body2.X = new Geometric1([0, 4], Unit.METER);
+        const G = new Geometric1([4, 0], Unit.NEWTON.div(Unit.KILOGRAM).div(Unit.KILOGRAM).mul(Unit.METER).mul(Unit.METER));
+        const forceLaw = new GravitationLaw(body1, body2);
+        forceLaw.G = G;
+        const forces = forceLaw.updateForces();
+        expect(forces.length).toBe(2);
+        const f1 = forces[0];
+        expect(f1.F.a).toBe(0);
+        expect(f1.F.x).toBe(1.5);
+        expect(f1.F.uom).toBe(Unit.NEWTON);
+        const f2 = forces[1];
+        expect(f2.F.a).toBe(0);
+        expect(f2.F.x).toBe(-1.5);
+        expect(f2.F.uom).toBe(Unit.NEWTON);
+        expect(forceLaw.forces.length).toBe(2);
+        expect(forceLaw.forces[0]).toBe(f1);
+        expect(forceLaw.forces[1]).toBe(f2);
+    });
+});

@@ -1,0 +1,16 @@
+.eslintignore
+.eslintrc
+deploy.sh
+dist/cjs/**/*.*
+dist/esm/**/*.*
+dist/system/index.d.ts
+dist/system/lib/**/*.*
+dist/umd/index.d.ts
+dist/umd/lib/**/*.*
+docs/
+src/
+types/
+jest.config.js
+rollup.config.js
+tsconfig.json
+typedoc.json 
