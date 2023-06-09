@@ -3,7 +3,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
-import { RollupOptions } from 'rollup';
+import { Plugin, RollupOptions } from 'rollup';
 import dts from 'rollup-plugin-dts';
 import external from 'rollup-plugin-peer-deps-external';
 import pkg from './package.json' assert { type: 'json' };
@@ -49,7 +49,7 @@ const options: RollupOptions =
         }
     ],
     plugins: [
-        external() as unknown as Plugin,    // I think the definition is out of date.
+        external() as unknown as Plugin,    // I think the definition for external is out of date.
         resolve(),
         typescript({ tsconfig: './tsconfig.json' })
     ]
