@@ -1,10 +1,11 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import resolve from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
+import { RollupOptions } from 'rollup';
 import dts from 'rollup-plugin-dts';
 import external from 'rollup-plugin-peer-deps-external';
-import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json' assert { type: 'json' };
 /**
 * Comment with library information to be appended in the generated bundles.
@@ -15,10 +16,8 @@ const banner = `/**
 * Released under the ${pkg.license} License.
 */
 `.trim();
-/**
-* @type {import('rollup').RollupOptions}
-*/
-const options =
+
+const options: RollupOptions =
 {
     input: 'src/index.ts',
     output: [
@@ -50,7 +49,7 @@ const options =
         }
     ],
     plugins: [
-        external(),
+        external() as unknown as Plugin,    // I think the definition is out of date.
         resolve(),
         typescript({ tsconfig: './tsconfig.json' })
     ]
@@ -58,7 +57,7 @@ const options =
 export default [
     options,
     {
-        input: 'dist/esm/types/index.d.ts',
+        input: './dist/esm/types/src/index.d.ts',
         output: [{ file: pkg.types, format: "esm" }],
         plugins: [dts()],
     }

@@ -1,4 +1,4 @@
-import findIndex from './findIndex';
+import findIndex from './findIndex.js';
 
 /**
  * Search an array for the first element that satisfies a given condition and

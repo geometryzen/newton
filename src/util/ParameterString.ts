@@ -16,7 +16,7 @@
 import { Parameter } from './Parameter';
 import { Subject } from './Subject';
 import { toName } from './toName';
-import { validName } from './validName';
+import { validName } from './validName.js';
 
 /**
  * @hidden

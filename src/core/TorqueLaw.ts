@@ -21,5 +21,4 @@ export interface TorqueLaw<T> extends SimObject {
      * 
      */
     potentialEnergy(): T;
-
 }

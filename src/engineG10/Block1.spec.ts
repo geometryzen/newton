@@ -1,4 +1,5 @@
 import { Unit } from "@geometryzen/multivectors";
+import { describe } from '@jest/globals'; // not really needed since we have @types/jest
 import { Block1 } from "./Block1";
 import { MetricG10 } from "./MetricG10";
 

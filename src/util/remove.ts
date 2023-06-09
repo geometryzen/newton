@@ -1,4 +1,4 @@
-import removeAt from './removeAt';
+import removeAt from './removeAt.js';
 
 /**
  * @hidden

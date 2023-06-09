@@ -16,7 +16,7 @@
 import { SimObject } from '../core/SimObject';
 
 /**
- * @hidden
+ *
  */
 export class AbstractSimObject implements SimObject {
     /**

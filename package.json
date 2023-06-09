@@ -12,6 +12,7 @@
     "main": "./dist/esm/index.js",
     "module": "./dist/esm/index.min.js",
     "types": "./dist/index.d.ts",
+    "type": "module",
     "files": [
         "LICENSE",
         "README.md",
@@ -55,8 +56,8 @@
         "Engine"
     ],
     "scripts": {
-        "build": "npm run clean && rollup -c",
-        "test": "jest",
+        "build": "npm run clean && rollup --config rollup.config.mts --configPlugin @rollup/plugin-typescript",
+        "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
         "check": "npx package-check",
         "clean": "rm -rf dist && rm -rf docs",
         "coverage": "npm run test -- --coverage",
@@ -69,30 +70,33 @@
         "prepublishOnly": "npm run build && npm run pages"
     },
     "devDependencies": {
-        "@babel/plugin-transform-modules-commonjs": "^7.20.11",
-        "@rollup/plugin-commonjs": "^24.0.0",
-        "@rollup/plugin-node-resolve": "^15.0.1",
-        "@rollup/plugin-typescript": "^11.0.0",
+        "@babel/plugin-transform-modules-commonjs": "^7.22.5",
+        "@jest/globals": "^29.5.0",
+        "@rollup/plugin-commonjs": "^25.0.0",
+        "@rollup/plugin-node-resolve": "^15.1.0",
+        "@rollup/plugin-terser": "^0.4.3",
+        "@rollup/plugin-typescript": "^11.1.1",
         "@skypack/package-check": "^0.2.2",
-        "@types/jest": "^29.2.5",
-        "@typescript-eslint/eslint-plugin": "^5.48.0",
-        "@typescript-eslint/parser": "^5.48.0",
-        "eslint": "^8.31.0",
-        "gh-pages": "^4.0.0",
-        "jest": "^29.3.1",
-        "open-cli": "^7.1.0",
-        "rollup-plugin-dts": "^5.1.0",
+        "@types/jest": "^29.5.2",
+        "@types/rollup-plugin-peer-deps-external": "^2.2.1",
+        "@typescript-eslint/eslint-plugin": "^5.59.9",
+        "@typescript-eslint/parser": "^5.59.9",
+        "eslint": "^8.42.0",
+        "gh-pages": "^5.0.0",
+        "jest": "^29.5.0",
+        "open-cli": "^7.2.0",
+        "rollup-plugin-dts": "^5.3.0",
         "rollup-plugin-peer-deps-external": "^2.2.4",
-        "rollup-plugin-terser": "^7.0.2",
-        "ts-jest": "^29.0.3",
-        "ts-jest-resolver": "^2.0.0",
-        "typedoc": "^0.23.23",
-        "typescript": "^4.9.4"
+        "ts-jest": "^29.1.0",
+        "ts-jest-resolver": "^2.0.1",
+        "ts-node": "^10.9.1",
+        "typedoc": "^0.24.8",
+        "typescript": "^5.1.3"
     },
     "peerDependencies": {
         "@geometryzen/multivectors": "0.9.7"
     },
     "dependencies": {
-        "tslib": "^2.4.1"
+        "tslib": "^2.5.3"
     }
 }
